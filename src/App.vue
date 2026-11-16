@@ -1,7 +1,7 @@
 <script setup lang="ts">
 import { ref } from "vue";
 import DemandPage from "./DemandPage.vue";
-import { loadSession, saveSession, USERS } from "./store";
+import { loadSession, roleLabel, saveSession, USERS } from "./store";
 import type { SessionUser } from "./types";
 
 const user = ref<SessionUser | null>(loadSession());
@@ -29,7 +29,7 @@ function logout() {
         </span>
       </div>
       <h1>数字化法治企业建设平台</h1>
-      <p>集团法律部需求备案。填报者维护本单位数据，查看者可查阅全部备案。</p>
+      <p>填报员批量提报，本单位部门主任一级审批，集团法律部用户二级审批。</p>
       <div class="login-actions">
         <button
           v-for="item in USERS"
@@ -38,10 +38,10 @@ function logout() {
           :class="{ primary: item.role === 'reporter' }"
           @click="enter(item)"
         >
-          {{ item.role === "reporter" ? "填报者" : "查看者" }}进入 · {{ item.name }}
+          {{ roleLabel(item.role) }}进入 · {{ item.name }}
         </button>
       </div>
-      <div class="login-note">填报者示例为王填报。另有张明提交的备案，只有查看者能看到。</div>
+      <div class="login-note">王填报可批量提报。赵主任、孙主任做本单位一级审批，也可自行提报。李总、周审只能查看并做二级审批。张明的山东备案供孙主任审批。</div>
     </div>
   </div>
   <DemandPage v-else :user="user" @logout="logout" />

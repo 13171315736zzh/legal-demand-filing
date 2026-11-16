@@ -1,4 +1,4 @@
-export type Role = "reporter" | "viewer";
+export type Role = "reporter" | "director" | "group";
 
 export interface SessionUser {
   id: string;
@@ -11,10 +11,10 @@ export interface Demand {
   id: string;
   recordNo: string;
   title: string;
+  business: string;
   systemName: string;
   moduleName: string;
   demandType: string;
-  maintainMode: string;
   digitalMode: string;
   proposeDept: string;
   proposeContact: string;
@@ -30,6 +30,8 @@ export interface Demand {
   progress: string;
   progressDesc: string;
   remark: string;
+  approvalStatus: string;
+  approvalOpinion: string;
   createdBy: string;
   createdAt: string;
 }
@@ -40,6 +42,9 @@ export interface QueryState {
   keyword: string;
   proposeDept: string;
   developDept: string;
-  maintainMode: string;
+  demandType: string;
+  approvalStatus: string;
   progress: string[];
+  proposeDateStart: string;
+  proposeDateEnd: string;
 }
